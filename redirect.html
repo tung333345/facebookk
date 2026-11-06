@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xem ngay</title>
+<meta property="og:title" content="Xem ngay">
+<meta property="og:description" content="Bấm vào để xem">
+<style>
+  body { font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #fff; color: #555; }
+</style>
+</head>
+<body>
+<p>Đang tải...</p>
+<script>
+  var web = "https://www.facebook.com/me";
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+  if (isAndroid) {
+    // Mở thẳng app Facebook; nếu máy không có app thì Android tự chuyển sang link web
+    window.location.href =
+      "intent://profile#Intent;scheme=fb;package=com.facebook.katana;" +
+      "S.browser_fallback_url=" + encodeURIComponent(web) + ";end";
+    // Phòng trường hợp trình duyệt trong app (Messenger, Zalo...) chặn intent
+    setTimeout(function () { window.location.href = web; }, 1800);
+  } else {
+    // iPhone và máy tính: dùng link web, iPhone có app sẽ tự mở app Facebook
+    window.location.replace(web);
+  }
+</script>
+<noscript><a href="https://www.facebook.com/me">Bấm vào đây</a></noscript>
+</body>
+</html>
